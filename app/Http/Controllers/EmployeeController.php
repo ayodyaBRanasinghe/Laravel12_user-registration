@@ -20,7 +20,7 @@ class EmployeeController extends Controller
             'name' => 'required|string',
             'email' => 'required|email|unique:employees,email',
             'password' => 'required|string|min:6',
-            'nic' => 'required|string|unique:employees,nic',
+            'nic' => ['required', 'regex:/^([0-9]{9}[vVxX]|[0-9]{12})$/'],
             'mobile_number' => 'required|string',
         ]);
 
@@ -33,7 +33,8 @@ class EmployeeController extends Controller
             'ip_address' => $request->ip(), // capture IP
         ]);
 
-        return response()->json($employee, Response::HTTP_CREATED);
+        return response()->json($employee, \Illuminate\Http\Response::HTTP_CREATED);
+        //return response()->json($employee, Response::HTTP_CREATED);
     }
 
     public function show($id)
@@ -56,7 +57,8 @@ class EmployeeController extends Controller
             'name' => 'sometimes|string',
             'email' => 'sometimes|email|unique:employees,email,' . $id,
             'password' => 'sometimes|string|min:6',
-            'nic' => 'sometimes|string|unique:employees,nic,' . $id,
+            'nic' => ['sometimes', 'regex:/^([0-9]{9}[vVxX]|[0-9]{12})$/'],
+            //'nic' => 'sometimes|string|unique:employees,nic,' . $id,
             'mobile_number' => 'sometimes|string',
         ]);
 
