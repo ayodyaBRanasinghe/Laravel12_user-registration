@@ -25,7 +25,7 @@ class EmployeeController extends Controller
             'name' => 'required|string',
             'email' => 'required|email|unique:employees,email',
             'password' => 'required|string|min:6',
-            'nic' => 'required|string|unique:employees,nic',
+            'nic' => ['required', 'regex:/^(\d{9}[vVxX]|\d{12})$/', 'unique:employees,nic'],
             'mobile_number' => 'required|string',
         ]);
 
@@ -43,7 +43,7 @@ class EmployeeController extends Controller
             'name' => 'required|string',
             'email' => 'required|email',
             'password' => 'nullable|string|min:6',
-            'nic' => 'required|string',
+            'nic' => ['required', 'regex:/^(\d{9}[vVxX]|\d{12})$/'],
             'mobile_number' => 'required|string',
         ]);
 
