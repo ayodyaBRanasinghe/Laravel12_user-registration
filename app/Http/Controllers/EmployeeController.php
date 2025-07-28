@@ -26,7 +26,7 @@ class EmployeeController extends Controller
             'email' => 'required|email|unique:employees,email',
             'password' => 'required|string|min:6',
             'nic' => ['required', 'regex:/^(\d{9}[vVxX]|\d{12})$/', 'unique:employees,nic'],
-            'mobile_number' => 'required|string',
+            'mobile_number' => ['required', 'regex:/^0\d{9}$/'],
         ]);
 
         return response()->json($this->employeeRepository->create($data), 201);
@@ -44,7 +44,7 @@ class EmployeeController extends Controller
             'email' => 'required|email',
             'password' => 'nullable|string|min:6',
             'nic' => ['required', 'regex:/^(\d{9}[vVxX]|\d{12})$/'],
-            'mobile_number' => 'required|string',
+            'mobile_number' => ['required', 'regex:/^0\d{9}$/'],
         ]);
 
         return response()->json($this->employeeRepository->update($id, $data));
