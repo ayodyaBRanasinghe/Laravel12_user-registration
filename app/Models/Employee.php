@@ -14,7 +14,8 @@ class Employee extends Model
         'email', 
         'password', 
         'nic', 
-        'mobile_number'
+        'mobile_number',
+        'ip_address',
     ];
 }
 

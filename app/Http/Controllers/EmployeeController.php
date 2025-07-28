@@ -27,7 +27,10 @@ class EmployeeController extends Controller
             'password' => 'required|string|min:6',
             'nic' => ['required', 'regex:/^(\d{9}[vVxX]|\d{12})$/', 'unique:employees,nic'],
             'mobile_number' => ['required', 'regex:/^0\d{9}$/'],
+            
         ]);
+         // Add the request's IP address
+        $data['ip_address'] = $request->ip();
 
         return response()->json($this->employeeRepository->create($data), 201);
     }
@@ -45,7 +48,9 @@ class EmployeeController extends Controller
             'password' => 'nullable|string|min:6',
             'nic' => ['required', 'regex:/^(\d{9}[vVxX]|\d{12})$/'],
             'mobile_number' => ['required', 'regex:/^0\d{9}$/'],
+            
         ]);
+        //$data['ip_address'] = $request->ip();   //catch ip
 
         return response()->json($this->employeeRepository->update($id, $data));
     }
