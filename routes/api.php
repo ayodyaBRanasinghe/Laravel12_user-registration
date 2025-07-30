@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ProductController;
 
 Route::prefix('employees')->group(function () {
     Route::get('/', [EmployeeController::class, 'index']);
@@ -10,3 +11,6 @@ Route::prefix('employees')->group(function () {
     Route::put('/{id}', [EmployeeController::class, 'update']);
     Route::delete('/{id}', [EmployeeController::class, 'destroy']);
 });
+
+Route::apiResource('products', ProductController::class);
+
