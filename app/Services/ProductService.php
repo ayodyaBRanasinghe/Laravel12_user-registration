@@ -15,6 +15,7 @@ class ProductService {
 
         $product =  $this->productRepository->create($data);
 
-        return $product;
+        return $product;  
+
     }
 }

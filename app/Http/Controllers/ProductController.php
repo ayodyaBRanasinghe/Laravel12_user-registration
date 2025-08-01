@@ -11,6 +11,8 @@ class ProductController extends Controller
     public function __construct(ProductService $productService){
         $this->productService = $productService;
     }
+
+    
     public function store(Request $request)
     {
         $validated = $request->validate([
