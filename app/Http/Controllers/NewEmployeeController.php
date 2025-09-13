@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\NewEmployeeService;
+use Illuminate\Support\Facades\Log;
+
 
 class NewEmployeeController extends Controller
 {
@@ -11,10 +13,13 @@ class NewEmployeeController extends Controller
 
     public function __construct(NewEmployeeService $newEmployeeService){
         $this->newEmployeeService = $newEmployeeService;
+        Log::info('NewEmployeeController instantiated');
     }
 
 
     public function store(Request $request){
+        Log::info('Store method called', ['request' => $request->all()]);
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:new_employees,email',
@@ -22,8 +27,10 @@ class NewEmployeeController extends Controller
             'nic' => 'required|string|unique:new_employees,nic',
             'mobile_number' => 'required|digits:10',
         ]);
+        Log::info('Validation passed', ['validated' => $validated]);
 
         $employee = $this->newEmployeeService->create($validated);
+        Log::info('Employee created', ['employee_id' => $employee->id]);
 
         return response()->json($employee, 201);
     }

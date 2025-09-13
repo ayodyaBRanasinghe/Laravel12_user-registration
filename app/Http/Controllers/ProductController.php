@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Services\ProductService;
 
+
 class ProductController extends Controller
 {
     protected $productService;
@@ -23,9 +24,7 @@ class ProductController extends Controller
         ]);
 
         $product = $this->productService->createProduct($validated);
-
+       
         return response()->json($product, 201);
-
     }
-
 }

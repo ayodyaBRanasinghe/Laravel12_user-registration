@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->decimal('price',8,2);
             $table->integer('stock'); 
-            $table->timestamps();
-            $table->softDeletes();
+            $table->timestamps();         //get at    //created at     //updated at
+            $table->softDeletes();       //deleted at
         });
     }
 
